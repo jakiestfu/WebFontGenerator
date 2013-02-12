@@ -2,6 +2,8 @@
 
 class convertFonts {
 	
+	private $fontForge = '../bin/fontforge';
+	
 	private $fontName;
 	private $fileName;
 	private $folder;
@@ -12,7 +14,7 @@ class convertFonts {
 		
 		mkdir($this->folder.'/fonts', 0777, true);
 		
-		$handle = popen( './fontforge -script convert.sh '.$this->folder.' '.$this->fileName, "r" );
+		$handle = popen( $this->fontForge.' -script convert.sh '.$this->folder.' '.$this->fileName, "r" );
 		$this->fontName = trim(fread($handle, 2096));
 		pclose($handle);
 	}
